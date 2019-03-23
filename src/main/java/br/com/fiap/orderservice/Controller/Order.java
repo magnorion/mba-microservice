@@ -27,13 +27,15 @@ public class Order {
     }
 
     @PostMapping("/order/save")
-    public Map<String, OrderEntity> save(@RequestBody OrderEntity order) {
-        HashMap<String, OrderEntity> mapa = new HashMap<>();
+    public Map<String, String> save(@RequestBody OrderEntity order) {
+        HashMap<String, String> mapa = new HashMap<>();
         try {
             this.orders.add(order);
-            mapa.put("Order", this.orders.get(this.orders.size() - 1));
+            int id = this.orders.size() - 1;
+
+            mapa.put("ID", "Order criada com o id: " + id);
         } catch (Exception err) {
-            mapa.put("Order", null);
+            mapa.put("Order", "Não foi possivel salvar!");
         }
 
         return mapa;
