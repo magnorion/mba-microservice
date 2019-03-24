@@ -33,7 +33,7 @@ public class Order {
             this.orders.add(order);
             int id = this.orders.size() - 1;
 
-            mapa.put("ID", "Order criada com o id: " + id);
+            mapa.put("URL", "http://localhost:8080/order/findById/" + id);
         } catch (Exception err) {
             mapa.put("Order", "Não foi possivel salvar!");
         }
@@ -49,6 +49,7 @@ public class Order {
         try {
             this.orders.set(id, order);
             mapa.put("Mensagem", "Order atualizada!");
+            mapa.put("URL", "http://localhost:8080/order/findById/" + id);
         } catch (Exception err) {
             mapa.put("Mensagem", "Esta order não existe!");
         }

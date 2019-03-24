@@ -12,6 +12,6 @@ import java.sql.Timestamp;
 public class Pagamento {
     private int id;
     private int cartao;
-    private Timestamp validade;
+    private String validade;
     private String bandeira;
 }
