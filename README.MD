@@ -51,7 +51,7 @@ O retorno deste envio será a url de busca por id
 Método: GET
 > http://localhost:8080/order/finById/:id
 
-Busque os pagamentos passando um id na url. O retorno será o objeto existente
+Busque os orders passando um id na url. O retorno será o objeto existente
 ```
 {
    "email": "lucas@teste.com",
@@ -79,7 +79,7 @@ Busque os pagamentos passando um id na url. O retorno será o objeto existente
 Método: POST
 > http://localhost:8080/order/update/:id
 
-Atualize os dados de pagamentos. Envie um objeto com os dados de pagamento
+Atualize os dados de order. Envie um objeto com os dados de order
 ```
 {
    "email": "lucas@teste.com",
@@ -103,7 +103,7 @@ Atualize os dados de pagamentos. Envie um objeto com os dados de pagamento
 }
 ```
 
-Retorna a url para retornar os dados do pagamento
+Retorna a url para retornar os dados do order
 ```
 {
     "Mensagem": "order atualizado!",
@@ -115,7 +115,7 @@ Retorna a url para retornar os dados do pagamento
 Método POST
 > http://localhost:8080/order/delete/:id
 
-Remova um pagamento passando o id pela a url
+Remova um order passando o id pela a url
 ```
 {
     "Mensagem": "order: 0 removido!"
