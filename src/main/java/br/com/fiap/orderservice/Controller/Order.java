@@ -1,6 +1,8 @@
 package br.com.fiap.orderservice.Controller;
 
 import br.com.fiap.orderservice.Entity.OrderEntity;
+import br.com.fiap.orderservice.Exception.EntityNotFoundException;
+import br.com.fiap.orderservice.Exception.OrderNotFound;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class Order {
             mapa.put("Order", order);
         } catch (Exception err) {
             mapa.put("Order", null);
+            throw new OrderNotFound("Houve um erro: " + err.getMessage());
         }
         return mapa;
     }
