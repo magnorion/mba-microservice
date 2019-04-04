@@ -3,6 +3,8 @@ package br.com.fiap.orderservice.Controller;
 import br.com.fiap.orderservice.Entity.OrderEntity;
 import br.com.fiap.orderservice.Exception.EntityNotFoundException;
 import br.com.fiap.orderservice.Exception.OrderNotFound;
+import br.com.fiap.orderservice.Exception.OrderUpdateException;
+import br.com.fiap.orderservice.Exception.ServerHandlerException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class Order {
 
     @PostMapping("/order/update/{id}")
     public Map<String, String> update(@RequestBody OrderEntity order,
-        @PathVariable("id") int id) {
+        @PathVariable("id") int id) throws OrderUpdateException, ServerHandlerException {
 
         HashMap<String, String> mapa = new HashMap<>();
         try {
@@ -54,7 +56,7 @@ public class Order {
             mapa.put("Mensagem", "Order atualizada!");
             mapa.put("URL", "http://localhost:8080/order/findById/" + id);
         } catch (Exception err) {
-            mapa.put("Mensagem", "Esta order não existe!");
+            throw new ServerHandlerException("Erro: " + err.getMessage());
         }
 
         return mapa;
