@@ -18,7 +18,7 @@ public class Order {
     private ArrayList<OrderEntity> orders = new ArrayList<>();
 
     @GetMapping("/order/findById/{id}")
-    public Map<String, OrderEntity> findById(@PathVariable("id") int id) {
+    public Map<String, OrderEntity> findById(@PathVariable("id") int id) throws ServerHandlerException {
         HashMap<String, OrderEntity> mapa = new HashMap<>();
 
         try {
@@ -26,13 +26,13 @@ public class Order {
             mapa.put("Order", order);
         } catch (Exception err) {
             mapa.put("Order", null);
-            throw new OrderNotFound("Houve um erro: " + err.getMessage());
+            throw new ServerHandlerException("Houve um erro: " + err.getMessage());
         }
         return mapa;
     }
 
     @PostMapping("/order/save")
-    public Map<String, String> save(@RequestBody OrderEntity order) {
+    public Map<String, String> save(@RequestBody OrderEntity order) throws ServerHandlerException {
         HashMap<String, String> mapa = new HashMap<>();
         try {
             this.orders.add(order);
@@ -40,7 +40,7 @@ public class Order {
 
             mapa.put("URL", "http://localhost:8080/order/findById/" + id);
         } catch (Exception err) {
-            mapa.put("Order", "Não foi possivel salvar!");
+            throw new ServerHandlerException("Erro: " + err.getMessage());
         }
 
         return mapa;
@@ -63,14 +63,14 @@ public class Order {
     }
 
     @PostMapping("/order/delete/{id}")
-    public Map<String, String> delete(@PathVariable("id") int id) {
+    public Map<String, String> delete(@PathVariable("id") int id) throws ServerHandlerException {
 
         HashMap<String, String> mapa = new HashMap<>();
         try {
             this.orders.remove(id);
             mapa.put("Mensagem", "Order: " + id + " removido!");
         } catch (Exception err) {
-            mapa.put("Order", "Esta order não existe!");
+            throw new ServerHandlerException("Erro: " + err.getMessage());
         }
 
         return mapa;
