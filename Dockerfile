@@ -1,5 +1,4 @@
-FROM openjdk:8-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} ./target/app.jar
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "./target/app.jar"]
+FROM openjdk:8
+EXPOSE 8080:8080
+ADD target/order-service-0.0.1-SNAPSHOT.jar order-service.jar
+ENTRYPOINT ["java", "-jar", "order-service.jar"]

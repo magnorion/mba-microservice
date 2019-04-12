@@ -3,6 +3,7 @@ package br.com.fiap.orderservice.Tests;
 import br.com.fiap.orderservice.Entity.OrderEntity;
 import br.com.fiap.orderservice.Entity.Pagamento;
 import br.com.fiap.orderservice.Entity.Produto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +23,6 @@ import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static sun.plugin2.util.PojoUtil.toJson;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestOrderController {
@@ -56,9 +56,10 @@ public class TestOrderController {
 
     @Test
     public void SaveOrder() {
+        ObjectMapper mapper = new ObjectMapper();
         try {
             this.mvc.perform(post("/order/save")
-                    .content(toJson(this.entity))
+                    .content(mapper.writeValueAsString(this.entity))
                     .accept(MediaType.APPLICATION_JSON)
                     .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());
