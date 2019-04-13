@@ -5,6 +5,7 @@ import br.com.fiap.orderservice.Exception.EntityNotFoundException;
 import br.com.fiap.orderservice.Exception.OrderNotFound;
 import br.com.fiap.orderservice.Exception.OrderUpdateException;
 import br.com.fiap.orderservice.Exception.ServerHandlerException;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-
+@Api(value = "Order", description = "List of Orders")
 public class Order {
 
     private ArrayList<OrderEntity> orders = new ArrayList<>();
